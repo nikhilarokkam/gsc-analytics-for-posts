@@ -1,0 +1,16 @@
+{
+    "name": "admin/gsc-analytics",
+    "description": "Google Search Console Analytics for WordPress",
+    "type": "project",
+    "require": {
+        "google/apiclient": "^2.0"
+    },
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Rokkam Nikhila",
+            "email": "rokkamnikhila@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
