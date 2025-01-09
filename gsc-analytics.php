@@ -6,6 +6,16 @@
  * Author: Rokkam Nikhila
  */
 
+require_once plugin_dir_path(__FILE__) . 'vendor/plugin-update-checker/plugin-update-checker.php';
+
+$updateChecker = Puc_v4_Factory::buildUpdateChecker(
+    'https://raw.githubusercontent.com/nikhilarokkam/gsc-analytics-for-posts/main/version.json',
+    __FILE__,
+    'gsc-analytics-for-posts'
+);
+
+$updateChecker->setCacheDuration(3600);
+
 if (!defined('ABSPATH')) {
     exit;
 }
