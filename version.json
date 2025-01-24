@@ -1,4 +1,5 @@
 {
+    "name": "GSC Analytics for Posts",
     "version": "2.2",
     "download_url": "https://github.com/nikhilarokkam/gsc-analytics-for-posts/archive/refs/heads/main.zip",
     "changelog": "Fixed bugs and added improvements to the update mechanism."
