@@ -4,20 +4,22 @@
  * Description: Fetch impressions, clicks, and average position from Google Search Console for WordPress posts.
  * Author: Rokkam Nikhila
  */
-
-require_once plugin_dir_path(__FILE__) . 'vendor/plugin-update-checker/plugin-update-checker.php';
-
-$updateChecker = Puc_v4_Factory::buildUpdateChecker(
-    'https://raw.githubusercontent.com/nikhilarokkam/gsc-analytics-for-posts/main/version.json',
-    __FILE__,
-    'gsc-analytics-for-posts'
-);
-
-$updateChecker->setCacheDuration(3600);
-
+ 
 if (!defined('ABSPATH')) {
     exit;
 }
+
+// Include the Plugin Update Checker library
+require_once plugin_dir_path(__FILE__) . 'vendor/plugin-update-checker/load-v5p5.php';
+
+use YahnisElsts\PluginUpdateChecker\v5p5\PucFactory;
+
+// Initialize the Plugin Update Checker
+$updateChecker = PucFactory::buildUpdateChecker(
+    'https://raw.githubusercontent.com/nikhilarokkam/gsc-analytics-for-posts/main/version.json', // URL to your version.json file
+    __FILE__, // Full path to the main plugin file
+    'gsc-analytics-for-posts' // Plugin slug
+);
 
 require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 require_once plugin_dir_path(__FILE__) . 'admin/settings-page.php';
