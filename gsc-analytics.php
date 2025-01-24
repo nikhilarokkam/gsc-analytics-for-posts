@@ -2,7 +2,6 @@
 /**
  * Plugin Name: GSC Analytics for Posts
  * Description: Fetch impressions, clicks, and average position from Google Search Console for WordPress posts.
- * Version: 2.0
  * Author: Rokkam Nikhila
  */
 

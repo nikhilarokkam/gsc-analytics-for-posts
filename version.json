@@ -1,5 +1,5 @@
 {
-    "version": "2.0",
+    "version": "2.1",
     "download_url": "https://github.com/nikhilarokkam/gsc-analytics-for-posts/archive/refs/heads/main.zip",
-    "changelog": "Initial release with Google Search Console analytics integration for WordPress posts."
+    "changelog": "Fixed bugs and added improvements to the update mechanism."
 }
