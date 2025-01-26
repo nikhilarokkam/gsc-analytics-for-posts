@@ -87,3 +87,14 @@ This plugin supports seamless updates using the [Plugin Update Checker](https://
 ### Generate Clusters
 1. Click the "Generate Clusters" button in the `Analyze URL Queries` page.
 2. View clusters of related queries and their associated pages.
+
+---
+
+## 👤 Author
+Developed by Rokkam Nikhila
+🔗 [GitHub](https://github.com/nikhilarokkam) | [LinkedIn](https://www.linkedin.com/in/nikhila-rokkam-54a817259)
+
+---
+
+## ❤️ Support
+If you find this plugin useful, please consider giving it a ⭐ on GitHub!
