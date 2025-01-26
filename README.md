@@ -91,7 +91,7 @@ This plugin supports seamless updates using the [Plugin Update Checker](https://
 ---
 
 ## 👤 Author
-Developed by Rokkam Nikhila
+Developed by Rokkam Nikhila<br />
 🔗 [GitHub](https://github.com/nikhilarokkam) | [LinkedIn](https://www.linkedin.com/in/nikhila-rokkam-54a817259)
 
 ---
