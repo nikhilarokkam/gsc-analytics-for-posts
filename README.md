@@ -2,7 +2,6 @@
 
 ![WordPress](https://img.shields.io/badge/WordPress-6.3+-blue.svg)
 ![PHP](https://img.shields.io/badge/PHP-%3E%3D%207.4-8892BF.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 **GSC Analytics for Posts** is a powerful WordPress plugin that integrates with Google Search Console to fetch and display performance metrics for your posts. Gain insights into impressions, clicks, and average position directly from your WordPress dashboard.
 
