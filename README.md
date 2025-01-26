@@ -6,8 +6,6 @@
 
 
 
-
-
 ![WordPress](https://img.shields.io/badge/WordPress-6.3+-blue.svg)
 ![PHP](https://img.shields.io/badge/PHP-%3E%3D%207.4-8892BF.svg)
 
