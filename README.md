@@ -74,16 +74,16 @@ This plugin supports seamless updates using the [Plugin Update Checker](https://
 
 ## 📖 Usage
 
-# Analytics Dashboard
+### Analytics Dashboard
 1. Navigate to `GSC Analytics > Analytics` to view your post performance data.
 2. Use filters for impressions and position to refine the results.
 3. Click on column headers to sort the data by title, impressions, clicks, or average position.
 
-# Analyze Queries
+### Analyze Queries
 1. Go to `GSC Analytics > Analyze URL Queries`.
 2. Enter a post URL and click "Analyze" to fetch its top queries.
 3. Review the table for query performance and frequency in the post content.
 
-# Generate Clusters
+### Generate Clusters
 1. Click the "Generate Clusters" button in the `Analyze URL Queries` page.
 2. View clusters of related queries and their associated pages.
