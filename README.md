@@ -69,10 +69,21 @@ This plugin supports seamless updates using the [Plugin Update Checker](https://
 - `version`: Plugin version (e.g., `2.2`).
 - `download_url`: URL to the latest plugin ZIP file.
 - `changelog`: Details about the update.
-Example `version.json`:
- ```bash
-{
-    "version": "2.2",
-    "download_url": "https://github.com/nikhilarokkam/gsc-analytics-for-posts/archive/refs/heads/main.zip",
-    "changelog": "Fixed bugs and added improvements to the update mechanism."
-}
+
+---
+
+## 📖 Usage
+
+# Analytics Dashboard
+1. Navigate to `GSC Analytics > Analytics` to view your post performance data.
+2. Use filters for impressions and position to refine the results.
+3. Click on column headers to sort the data by title, impressions, clicks, or average position.
+
+# Analyze Queries
+1. Go to `GSC Analytics > Analyze URL Queries`.
+2. Enter a post URL and click "Analyze" to fetch its top queries.
+3. Review the table for query performance and frequency in the post content.
+
+# Generate Clusters
+1. Click the "Generate Clusters" button in the `Analyze URL Queries` page.
+2. View clusters of related queries and their associated pages.
