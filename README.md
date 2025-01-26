@@ -59,17 +59,18 @@
    
 3. Edit the `gsc-credentials.json` file to include your Google Search Console credentials.
 
-## 📦 Automatic Updates
-This plugin supports seamless updates using the Plugin Update Checker library. To ensure updates work correctly:
+---
 
-1. Maintain a valid version.json file in the GitHub repository.
+## 📦 Automatic Updates
+This plugin supports seamless updates using the [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker) library. To ensure updates work correctly:
+
+1. Maintain a valid `version.json` file in the GitHub repository.
 2. The file must include:
-<ul>
-<li>version: Plugin version (e.g., 2.2).</li>
-<li>download_url: URL to the latest plugin ZIP file.</li>
-<li>changelog: Details about the update.</li>
-</ul>
-3. Example version.json:
+- `version`: Plugin version (e.g., `2.2`).
+- `download_url`: URL to the latest plugin ZIP file.
+- `changelog`: Details about the update.
+Example `version.json`:
+ ```bash
 {
     "version": "2.2",
     "download_url": "https://github.com/nikhilarokkam/gsc-analytics-for-posts/archive/refs/heads/main.zip",
