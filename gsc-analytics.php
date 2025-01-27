@@ -46,7 +46,6 @@ function gsc_analytics_add_admin_menu() {
         'gsc_settings_page'
     );
 
-    // Separate submenu for Analyze URL Queries
     add_submenu_page(
         'gsc-analytics',
         'Analyze URL Queries',
@@ -56,7 +55,6 @@ function gsc_analytics_add_admin_menu() {
         'gsc_analyze_url_page'
     );
 
-    // Separate submenu for Generate Query Clusters
     add_submenu_page(
         'gsc-analytics',
         'Generate Query Clusters',
@@ -64,6 +62,16 @@ function gsc_analytics_add_admin_menu() {
         'manage_options',
         'gsc-generate-clusters',
         'gsc_generate_clusters_page'
+    );
+
+    // Add FAQ Queries submenu
+    add_submenu_page(
+        'gsc-analytics',
+        'FAQ Queries',
+        'FAQ Queries',
+        'manage_options',
+        'gsc-faq-queries',
+        'gsc_faq_queries_page'
     );
 }
 
@@ -445,4 +453,97 @@ function gsc_cluster_queries($queries) {
 
     return $clusters;
 }
+
+function gsc_faq_queries_page() {
+    echo '<h1 style="text-align: center;">FAQ Queries with Regex Filter</h1>';
+
+    echo '<form method="post" style="text-align: center; margin-top: 20px;">
+            <label>Enter URL:</label>
+            <input type="url" name="faq_url" required style="padding: 10px; margin-left: 10px; width: 300px;">
+            <button type="submit" name="fetch_faq_queries" style="padding: 10px 20px; background-color: #0073aa; color: #fff; border: none; margin-left: 10px;">Fetch Queries</button>
+          </form>';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fetch_faq_queries']) && !empty($_POST['faq_url'])) {
+        $faq_url = esc_url_raw($_POST['faq_url']);
+        gsc_process_faq_queries($faq_url);
+    }
+}
+
+function gsc_process_faq_queries($faq_url) {
+    $gsc_property = get_option('gsc_property', '');
+    $credentials_path = plugin_dir_path(__FILE__) . 'gsc-credentials.json';
+
+    if (empty($gsc_property) || !file_exists($credentials_path)) {
+        echo '<p style="color: red; text-align: center;">Error: Missing Google Search Console settings or credentials file.</p>';
+        return;
+    }
+
+    $client = new Google_Client();
+    $client->setAuthConfig($credentials_path);
+    $client->addScope('https://www.googleapis.com/auth/webmasters.readonly');
+
+    $service = new Google_Service_Webmasters($client);
+
+    try {
+        $startDate = date('Y-m-d', strtotime('-90 days'));
+        $endDate = date('Y-m-d');
+        $request = new Google_Service_Webmasters_SearchAnalyticsQueryRequest();
+        $request->setStartDate($startDate);
+        $request->setEndDate($endDate);
+        $request->setDimensions(['query']);
+        $request->setDimensionFilterGroups([
+            [
+                'filters' => [
+                    [
+                        'dimension' => 'page',
+                        'operator' => 'equals',
+                        'expression' => $faq_url,
+                    ],
+                ],
+            ],
+        ]);
+
+        $response = $service->searchanalytics->query($gsc_property, $request);
+
+        if ($response->getRows()) {
+            echo '<h3 style="text-align: center;">FAQ Queries for URL: ' . esc_html($faq_url) . '</h3>';
+            echo '<table style="width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; border-radius: 10px;">
+                    <thead>
+                        <tr style="background-color: #0073aa; color: #fff;">
+                            <th style="padding: 10px;">Query</th>
+                            <th style="padding: 10px;">Clicks</th>
+                            <th style="padding: 10px;">Impressions</th>
+                            <th style="padding: 10px;">CTR</th>
+                            <th style="padding: 10px;">Position</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+
+            foreach ($response->getRows() as $row) {
+                $query = esc_html($row->getKeys()[0]);
+                if (preg_match('/\b(who|what|where|when|why|how)\b/i', $query)) {
+                    $clicks = $row->getClicks();
+                    $impressions = $row->getImpressions();
+                    $ctr = $impressions > 0 ? round(($clicks / $impressions) * 100, 2) . '%' : '0%';
+                    $position = round($row->getPosition(), 2);
+
+                    echo '<tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">' . $query . '</td>
+                            <td style="padding: 10px;">' . $clicks . '</td>
+                            <td style="padding: 10px;">' . $impressions . '</td>
+                            <td style="padding: 10px;">' . $ctr . '</td>
+                            <td style="padding: 10px;">' . $position . '</td>
+                          </tr>';
+                }
+            }
+
+            echo '</tbody></table>';
+        } else {
+            echo '<p style="color: red; text-align: center;">No FAQ queries found for this URL.</p>';
+        }
+    } catch (Exception $e) {
+        echo '<p style="color: red; text-align: center;">Error: ' . $e->getMessage() . '</p>';
+    }
+}
+
 ?>
