@@ -1,6 +1,6 @@
 {
     "name": "GSC Analytics for Posts",
-    "version": "2.2",
+    "version": "2.3",
     "download_url": "https://github.com/nikhilarokkam/gsc-analytics-for-posts/archive/refs/heads/main.zip",
-    "changelog": "Fixed bugs and added improvements to the update mechanism."
+    "changelog": "Added separate submenus for Analyze URL Queries and Generate Query Clusters."
 }
