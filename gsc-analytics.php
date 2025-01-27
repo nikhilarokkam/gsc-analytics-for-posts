@@ -46,6 +46,7 @@ function gsc_analytics_add_admin_menu() {
         'gsc_settings_page'
     );
 
+    // Separate submenu for Analyze URL Queries
     add_submenu_page(
         'gsc-analytics',
         'Analyze URL Queries',
@@ -53,6 +54,16 @@ function gsc_analytics_add_admin_menu() {
         'manage_options',
         'gsc-analyze-url',
         'gsc_analyze_url_page'
+    );
+
+    // Separate submenu for Generate Query Clusters
+    add_submenu_page(
+        'gsc-analytics',
+        'Generate Query Clusters',
+        'Generate Query Clusters',
+        'manage_options',
+        'gsc-generate-clusters',
+        'gsc_generate_clusters_page'
     );
 }
 
@@ -227,30 +238,26 @@ function gsc_handle_sort_and_filter($data) {
 }
 
 function gsc_analyze_url_page() {
-    echo '<h1 style="text-align: center;">Analyze URL Queries & Generate Clusters</h1>';
-
-    echo '<h2 style="text-align: center;">Analyze Queries for a Specific URL</h2>';
-    echo '<center>
-            <form method="post" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;">
-                <label>Enter URL:</label>
-                <input type="url" name="post_url" required style="padding: 5px; width: 300px;">
-                <button type="submit" name="analyze_url" style="padding: 5px 15px; background-color: #0073aa; color: #fff; border: none;">Analyze</button>
-            </form>
-          </center>';
+    echo '<h1 style="text-align: center;">Analyze URL Queries</h1>';
+    echo '<form method="post" style="text-align: center; margin-top: 20px;">
+            <label>Enter URL:</label>
+            <input type="url" name="post_url" required style="padding: 10px; margin-left: 10px; width: 300px;">
+            <button type="submit" name="analyze_url" style="padding: 10px 20px; background-color: #0073aa; color: #fff; border: none; margin-left: 10px;">Analyze</button>
+          </form>';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['analyze_url']) && !empty($_POST['post_url'])) {
         $post_url = esc_url_raw($_POST['post_url']);
         gsc_process_url_analysis($post_url);
     }
+}
 
-    echo '<h2 style="text-align: center; margin-top: 50px;">Generate Query Clusters</h2>';
-    echo '<center>
-            <form method="post" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button type="submit" name="analyze_clusters" style="padding: 10px 20px; background-color: #0073aa; color: #fff; border: none;">Generate Clusters</button>
-            </form>
-          </center>';
+function gsc_generate_clusters_page() {
+    echo '<h1 style="text-align: center;">Generate Query Clusters</h1>';
+    echo '<form method="post" style="text-align: center; margin-top: 20px;">
+            <button type="submit" name="generate_clusters" style="padding: 10px 20px; background-color: #0073aa; color: #fff; border: none;">Generate Clusters</button>
+          </form>';
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['analyze_clusters'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_clusters'])) {
         gsc_generate_clusters();
     }
 }
