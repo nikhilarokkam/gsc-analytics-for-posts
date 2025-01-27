@@ -103,12 +103,24 @@ function gsc_sort_and_filter_data($data) {
     return $data;
 }
 
-// Universal Helper Function for Generating Sort Links
 function gsc_generate_sort_link($column) {
     $current_sort_by = $_GET['sort_by'] ?? 'title';
     $current_sort_order = $_GET['sort_order'] ?? 'asc';
     $next_sort_order = ($current_sort_by === $column && $current_sort_order === 'asc') ? 'desc' : 'asc';
     return "?sort_by=$column&sort_order=$next_sort_order";
+}
+
+function gsc_render_date_filters() {
+    $filter_start_date = $_GET['filter_start_date'] ?? '';
+    $filter_end_date = $_GET['filter_end_date'] ?? '';
+
+    echo '<form method="get" style="margin-bottom: 20px;">
+            <label for="filter_start_date">Start Date:</label>
+            <input type="date" id="filter_start_date" name="filter_start_date" value="' . esc_attr($filter_start_date) . '" />
+            <label for="filter_end_date">End Date:</label>
+            <input type="date" id="filter_end_date" name="filter_end_date" value="' . esc_attr($filter_end_date) . '" />
+            <button type="submit" style="padding: 5px 10px; background-color: #0073aa; color: #fff; border: none;">Apply</button>
+          </form>';
 }
 
 function gsc_analytics_display_page() {
