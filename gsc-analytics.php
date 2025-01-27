@@ -75,54 +75,6 @@ function gsc_analytics_add_admin_menu() {
     );
 }
 
-function gsc_sort_and_filter_data($data) {
-    // Date filtering
-    $filter_start_date = $_GET['filter_start_date'] ?? null;
-    $filter_end_date = $_GET['filter_end_date'] ?? null;
-
-    // Apply date filters (if applicable)
-    if ($filter_start_date || $filter_end_date) {
-        $data = array_filter($data, function ($row) use ($filter_start_date, $filter_end_date) {
-            $row_date = strtotime($row['last_modified'] ?? ''); // Adjust field as needed
-            $start_date = $filter_start_date ? strtotime($filter_start_date) : null;
-            $end_date = $filter_end_date ? strtotime($filter_end_date) : null;
-
-            return (!$start_date || $row_date >= $start_date) && (!$end_date || $row_date <= $end_date);
-        });
-    }
-
-    // Sorting
-    $sort_by = $_GET['sort_by'] ?? 'title';
-    $sort_order = $_GET['sort_order'] ?? 'asc';
-    usort($data, function ($a, $b) use ($sort_by, $sort_order) {
-        $valueA = $a[$sort_by] ?? '';
-        $valueB = $b[$sort_by] ?? '';
-        return $sort_order === 'asc' ? $valueA <=> $valueB : $valueB <=> $valueA;
-    });
-
-    return $data;
-}
-
-function gsc_generate_sort_link($column) {
-    $current_sort_by = $_GET['sort_by'] ?? 'title';
-    $current_sort_order = $_GET['sort_order'] ?? 'asc';
-    $next_sort_order = ($current_sort_by === $column && $current_sort_order === 'asc') ? 'desc' : 'asc';
-    return "?sort_by=$column&sort_order=$next_sort_order";
-}
-
-function gsc_render_date_filters() {
-    $filter_start_date = $_GET['filter_start_date'] ?? '';
-    $filter_end_date = $_GET['filter_end_date'] ?? '';
-
-    echo '<form method="get" style="margin-bottom: 20px;">
-            <label for="filter_start_date">Start Date:</label>
-            <input type="date" id="filter_start_date" name="filter_start_date" value="' . esc_attr($filter_start_date) . '" />
-            <label for="filter_end_date">End Date:</label>
-            <input type="date" id="filter_end_date" name="filter_end_date" value="' . esc_attr($filter_end_date) . '" />
-            <button type="submit" style="padding: 5px 10px; background-color: #0073aa; color: #fff; border: none;">Apply</button>
-          </form>';
-}
-
 function gsc_analytics_display_page() {
     $analytics_data = gsc_fetch_analytics_data();
 
@@ -593,5 +545,4 @@ function gsc_process_faq_queries($faq_url) {
         echo '<p style="color: red; text-align: center;">Error: ' . $e->getMessage() . '</p>';
     }
 }
-
 ?>
