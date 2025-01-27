@@ -1,6 +1,6 @@
 {
     "name": "GSC Analytics for Posts",
-    "version": "2.3",
+    "version": "2.4",
     "download_url": "https://github.com/nikhilarokkam/gsc-analytics-for-posts/archive/refs/heads/main.zip",
-    "changelog": "Added separate submenus for Analyze URL Queries and Generate Query Clusters."
+    "changelog": "Added FAQ Queries section with regex filtering for 'who|what|where|when|why|how'."
 }
